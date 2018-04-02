@@ -9,6 +9,7 @@ $ pip install pyret
 ```
 
 ## Getting started
-1. Activate your virtual environment.
-2. Use tensorflow as backend. `export KERAS_BACKEND=tensorflow`
-3. Run the bash script `cd scripts; ./run_ln.sh`
+1. Switch to the refactor branch. `git checkout refactor`
+2. Activate your virtual environment.
+3. Use tensorflow as backend. `export KERAS_BACKEND=tensorflow`
+4. Run the bash script. `cd scripts; ./run_ln.sh`
