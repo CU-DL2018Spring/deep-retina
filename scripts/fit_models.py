@@ -10,7 +10,7 @@ import tensorflow as tf
 import keras.backend as K
 import tableprint as tp
 from deepretina.core import train
-from deepretina.models import bn_cnn, linear_nonlinear
+from deepretina.models import bn_cnn, linear_nonlinear, nips_cnn
 
 
 def context(func):
@@ -28,6 +28,9 @@ def context(func):
 def fit_bn_cnn(expt, stim):
     train(bn_cnn, expt, stim, lr=1e-2, nb_epochs=250, val_split=0.05)
 
+@context
+def fit_nips_cnn(expt, stim):
+    train(nips_cnn, expt, stim, lr=1e-2, nb_epochs=250, val_split=0.05)
 
 @context
 def fit_ln(expt, ci, stim, activation, l2_reg=0.1):
@@ -56,9 +59,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.model.upper() == 'BN_CNN':
-        #tp.banner(f'Training BN_CNN, expt {args.expt}, {args.stim}')
+        tp.banner(f'Training BN_CNN, expt {args.expt}, {args.stim}')
         fit_bn_cnn(args.expt, args.stim)
 
+    elif args.model.upper() == 'NIPS_CNN':
+        fit_nips_cnn(args.expt, args.stim)
     elif args.model.split('_')[0].upper() == 'LN':
         activation = args.model.split('_')[1]
         fit_ln(args.expt, int(args.cell), args.stim, activation)
